@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: mid-server
+   namespace: infra
+   labels:
+      app: mid-server
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: mid-server
+   template:
+      metadata:
+         labels:
+            app: mid-server
+      spec:
+         containers:
+         - name: mid-server
+           image: moers/mid-server:latest
+           env:
+              - name: SN_HOST_NAME
+                value: <SN_INSTANCE_FQDN>
+              - name: USER_NAME
+                value: <YOUR_MID_USERNAME>
+              - name: PASSWORD
+                valueFrom:
+                   secretKeyRef:
+                      name: mid-server-secret
+                      key: SN_PASSWD
+              - name: HOSTNAME
+                value: '<MID_SERVER_NAME>'
+           imagePullPolicy: IfNotPresent
