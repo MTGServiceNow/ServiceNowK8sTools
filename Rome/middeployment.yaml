@@ -1,33 +1,44 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-   name: mid-server
-   namespace: infra
-   labels:
-      app: mid-server
-spec:
-   replicas: 1
-   selector:
-      matchLabels:
-         app: mid-server
-   template:
-      metadata:
-         labels:
-            app: mid-server
-      spec:
-         containers:
-         - name: mid-server
-           image: moers/mid-server:latest
-           env:
-              - name: SN_HOST_NAME
-                value: <SN_INSTANCE_FQDN>
-              - name: USER_NAME
-                value: <YOUR_MID_USERNAME>
-              - name: PASSWORD
-                valueFrom:
-                   secretKeyRef:
-                      name: mid-server-secret
-                      key: SN_PASSWD
-              - name: HOSTNAME
-                value: '<MID_SERVER_NAME>'
-           imagePullPolicy: IfNotPresent
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: mid-deployment 
+  namespace: servicenow 
+spec: 
+  selector: 
+    matchLabels: 
+      app: mid 
+  replicas: 1 
+  template: 
+    metadata: 
+      labels: 
+        app: mid 
+      name: mid 
+    spec: 
+      containers:
+        - name: mid-service 
+          imagePullPolicy: Retry 
+          image: <image tag> 
+          env: 
+            - name: MID_INSTANCE_URL 
+              value: “” 
+            - name: MID_INSTANCE_USERNAME 
+              value: “” 
+            - name: MID_INSTANCE_PASSWORD 
+              valueFrom:
+               secretKeyRef:
+                  name: mid-server-secret
+                  key: SN_PASSWD
+            - name: MID_SECRETS_FILE 
+              value: "" 
+            - name: MID_SERVER_NAME 
+              value: "" 
+            - name: MID_PROXY_HOST 
+              value: "" 
+            - name: MID_PROXY_PORT 
+              value: "" 
+            - name: MID_PROXY_USERNAME 
+              value: "" 
+            - name: MID_PROXY_PASSWORD 
+              value: "" 
+            - name: MID_MUTUAL_AUTH_PEM_FILE 
+              value: "" 
