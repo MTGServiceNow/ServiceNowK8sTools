@@ -14,10 +14,15 @@ spec:
         app: mid 
       name: mid 
     spec: 
+      serviceAccountName: discovery
       containers:
         - name: mid-service 
-          imagePullPolicy: Retry 
+          imagePullPolicy: IfNotPresent 
           image: <image tag> 
+          resources:
+            requests:
+              cpu: 50m
+              memory: 300M
           env: 
             - name: MID_INSTANCE_URL 
               value: “” 
@@ -31,7 +36,7 @@ spec:
             - name: MID_SECRETS_FILE 
               value: "" 
             - name: MID_SERVER_NAME 
-              value: "" 
+              value: ""
             - name: MID_PROXY_HOST 
               value: "" 
             - name: MID_PROXY_PORT 
