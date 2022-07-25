@@ -100,9 +100,15 @@
         - AKS
         - EKS
         - GKE
-<!-- 
+
 ## DISCOVERED COMPONENTS
- 
+
+The out of the box patterns discover a significant amount of resources within Kubernetes environments.  Too many to document here separately so I'll link to the official [ServiceNow documentation](https://docs.servicenow.com/en-US/bundle/sandiego-it-operations-management/page/product/service-mapping/concept/kubernetes-discovery.html).   
+
+
+<!-- 
+## CORE OOB K8S DISCOVERY CONFIGURATION
+
 ## LOCAL K8S SETUP
  
 ## AMAZON AWS ELASTIC KUBERNETES SERIVCE (EKS)
