@@ -106,8 +106,35 @@
 The out of the box patterns discover a significant amount of resources within Kubernetes environments.  Too many to document here separately so I'll link to the official [ServiceNow documentation](https://docs.servicenow.com/en-US/bundle/sandiego-it-operations-management/page/product/service-mapping/concept/kubernetes-discovery.html).   
 
 
-<!-- 
 ## CORE OOB K8S DISCOVERY CONFIGURATION
+
+### Overview and Pre-requisites
+
+Out of the box Kubernetes discovery needs a few main components to function: 
+
+1. The URL for the K8s API address of the cluster we're trying to discover.  
+1. A MID server with access to that k8s API Endpoint Address.
+1. A ServiceAccount within the K8s cluster that has appropriate permission to discover the cluster.
+1. The ServiceAccount name and Bearer Token for the ServiceAccount.  
+
+The MID server is fairly standard.  It can be an existing MID server or you can deploy a containerized MID server per the documentation [here](../Rome/README.md).
+
+The service account within the Kubernetes cluster is generally best if its created directly within the cluster specifically for discovery purposes.  Please refer to [this](../DiscoveryServiceAccount/DiscoveryServiceAccount.md) documentation around building that service account.  
+
+In order to find the Bearer token for that account please refer to that same [article](../DiscoveryServiceAccount/DiscoveryServiceAccount.md).  
+
+Now that you have all that lets set it up in the ServiceNow Platform.  
+
+<!-- 
+### Setup
+
+1. Create the credential record: 
+1. Create Schedule
+1. Create Serverless Pattern
+
+### Test it 
+
+1. Common problems & Troubleshooting guide
 
 ## LOCAL K8S SETUP
  
