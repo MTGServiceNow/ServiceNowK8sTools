@@ -156,39 +156,49 @@ spec:
     metadata: 
       labels: 
         app: mid 
-      name: mid
+      name: mid 
     spec: 
       containers:
-        - name: mid-service 
+        - name: mid-server 
           imagePullPolicy: IfNotPresent 
-          image: <image tag> 
+          image: <image tag> #location of the image.
           resources:
             requests:
               cpu: 50m
               memory: 300M
           env: 
             - name: MID_INSTANCE_URL 
-              value: “<FULL INSTANCE URL>” 
+            # URL that your MID server will access to login to your instance.  
+              value: “” 
             - name: MID_INSTANCE_USERNAME 
-              value: “<MID SERVER USERNAME>” 
+            # Username that the MID server will use to login to your instance.  
+              value: “” 
             - name: MID_INSTANCE_PASSWORD 
+            # Password for the aforementioned account.
               valueFrom:
                secretKeyRef:
                   name: mid-server-secret
                   key: SN_PASSWD
             - name: MID_SECRETS_FILE 
+            # This is the location within the container where a secrets file has been mounted into the container.  That secrets file should contain key value pairs of these variables that can be used to configure the MID server.  
               value: "" 
             - name: MID_SERVER_NAME 
-              value: "<FRIENDLY MID SERVER NAME>"
+            # Name by which the MID server will report itself to the ServiceNow instance.  "Friendly Name"
+              value: ""
             - name: MID_PROXY_HOST 
+            # If the MID server needs to use a proxy for outbound communications this will be the IP address or hostname of that proxy server. 
               value: "" 
             - name: MID_PROXY_PORT 
+            # If the MID server needs to use a proxy for outbound communications this will be the port number it'll use to connect to that proxy server.  
               value: "" 
             - name: MID_PROXY_USERNAME 
+            # If the MID server needs to login to the proxy server for outbound communications this will be the username.
               value: "" 
             - name: MID_PROXY_PASSWORD 
+            # If the MID server needs to login to the proxy server for outbound communications this will be the password.
               value: "" 
             - name: MID_MUTUAL_AUTH_PEM_FILE 
+            # This is the file path within the container where a fully prepared PEM file has been mounted for use with Mutual TLS authentication to the ServiceNow platform.  If this is populated with a valid PEM file, the MID server won't attempt to authenticate with username and password.  
               value: "" 
 ```
 
