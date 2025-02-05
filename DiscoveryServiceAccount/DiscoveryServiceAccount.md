@@ -45,7 +45,27 @@ metadata:
   namespace: kube-system
 ```
 
-This creates a new service account called "discovery" within the kube-system namespace.  
+This creates a new service account called "discovery" within the kube-system namespace.   
+
+** Post 1.22 **
+
+Starting with 1.22 and higher, Kubernetes stopped automatically creating tokens for service accounts.  This was a security feature and ensures service accounts have one less attack surface.  However, in order for this discovery process to work, you'll need to add a section like this to your yaml file: 
+
+```
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: servicenow-discovery-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: "discovery"
+```
+
+This will create a token and bind it to the "discovery" service account.  
+
+
 
 ## Create the Cluster Role 
 
