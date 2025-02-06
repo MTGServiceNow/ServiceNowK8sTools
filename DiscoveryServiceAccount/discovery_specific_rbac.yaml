@@ -4,6 +4,15 @@ metadata:
   name: discovery
   namespace: kube-system
 ---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: servicenow-discovery-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: "discovery"
+---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
